@@ -21,7 +21,7 @@ struct ContentView: View {
                 Spacer()
                            
                         NavigationLink(destination: PoundedYam()) {
-                            Text("Pounded Yam")
+                            Text("Pounded Yam & Egusi Soup")
                 }
                 
                         NavigationLink(destination: YamPepSoup()) {
@@ -30,7 +30,7 @@ struct ContentView: View {
                 
                 
                     NavigationLink(destination: JollofRice()) {
-                            Text("Jollof Rice")
+                            Text("Jollof Rice & Plantain")
                     }
                         
                 Spacer()
@@ -54,19 +54,28 @@ struct ContentView: View {
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.black, lineWidth: 5))
                     .scaledToFit()
-                    
-                    
-                
                 
                 
                 
             }
+                
+         
+        
+                 .navigationBarTitle(Text("Menu"))
+                
+            }
           
-            .navigationBarTitle(Text("Menu"))
+           
         }
         
     }
-}
+
+
+
+
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
