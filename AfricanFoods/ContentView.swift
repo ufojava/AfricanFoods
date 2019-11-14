@@ -11,67 +11,101 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
-        NavigationView {
-            
-            Section {
-            VStack(alignment: .leading) {
-                
-                        
-                Text("Meal Description").foregroundColor(.green)
-                Spacer()
-                           
-                        NavigationLink(destination: PoundedYam()) {
-                            Text("Pounded Yam & Egusi Soup")
-                }
-                
-                        NavigationLink(destination: YamPepSoup()) {
-                            Text("Yam and Pepper Soup")
-                        }
-                
-                
-                    NavigationLink(destination: JollofRice()) {
-                            Text("Jollof Rice & Plantain")
-                    }
-                        
-                Spacer()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                
-                
-                
-                
-                
-                
-                }.padding()
-                
-            }
-             
-            
-            Section {
-                
-                Image("africanfoods")
-                    .resizable()
-                    .frame(width: 275.0, height: 250.0)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.black, lineWidth: 5))
-                    .scaledToFit()
-                
-                
-                
-            }
-                
-         
         
-                 .navigationBarTitle(Text("Menu"))
+       
+        
+        VStack {
+            NavigationView {
                 
+                Section {
+                VStack(alignment: .leading) {
+                    
+                            
+                    Text("Meal Description").foregroundColor(.green)
+                    Spacer()
+                               
+                            NavigationLink(destination: PoundedYam()) {
+                                Text("Pounded Yam & Egusi Soup")
+                    }
+                    
+                            NavigationLink(destination: YamPepSoup()) {
+                                Text("Yam and Pepper Soup")
+                            }
+                    
+                    
+                        NavigationLink(destination: JollofRice()) {
+                                Text("Jollof Rice & Plantain")
+                        }
+                            
+                    Spacer()
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                    
+                    
+                    
+                    }.padding()
+                    
+                }
+                 
+                
+                Section {
+                    
+                    VStack {
+                        
+                        Image("africanfoods")
+                                           .resizable()
+                                           .frame(width: 275.0, height: 250.0)
+                                           .clipShape(Circle())
+                                           .overlay(Circle().stroke(Color.black, lineWidth: 5))
+                                           .scaledToFit()
+                                       
+                                   }
+            
+                    
+                        
+                    }
+                    
+               
+                     
+                        
+                    
+                    .navigationBarTitle(Text("Menu"))
+                    
+            
+                    
+            }   //NavView End
+            
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Text("Create Order")
             }
-          
+            .foregroundColor(.white)
+            .padding()
+            .background(Color.blue)
+            .cornerRadius(8)
+            Spacer()
            
-        }
+      
+            
+          
+    
+            
+                     
+            
+        
+           
+        } //VStack End
+    
+    
+        
+    
+        
+        
+        
+
         
     }
 
 
-
+}
 
 
 
