@@ -17,8 +17,11 @@ struct ContentView: View {
         VStack {
             NavigationView {
                 
+                
                 Section {
                 VStack(alignment: .leading) {
+                    
+                    
                     
                             
                     Text("Meal Description").foregroundColor(.green)
@@ -64,29 +67,73 @@ struct ContentView: View {
                         
                     }
                     
+                Section { //Button Order
+                    
+                    VStack {
+                        Spacer()
+                        
+                        HStack(alignment: .center, spacing: 130) {
+                            Spacer()
+                            Button(action: {}) {
+                                NavigationLink(destination: CreatOrderView()) {
+                                    Text("Create Order")
+                                        .font(.system(size: 14))
+                                        .padding()
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(6)
+                                    
+                                }.padding()
+                                Spacer()
+                            
+                            }
+                        }
+                      
+                        
+                    } //Vstack End
+                    
+                    
+                } //Button Section End
+                    
                
                      
                         
                     
                     .navigationBarTitle(Text("Menu"))
                     
+
+                    
             
                     
             }   //NavView End
             
+            
+            
+            
+           /*
+          
+            //Button begin
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("Create Order")
+                
+                
+                
+                NavigationLink(destination: CreatOrderView()) {
+                    Text("Create Order")
+                    
+                }
             }
+                
             .foregroundColor(.white)
             .padding()
             .background(Color.blue)
             .cornerRadius(8)
             Spacer()
-           
-      
-            
+           */
+            //Button Ends
           
-    
+        
+            
+        
             
                      
             
@@ -144,5 +191,6 @@ var body: some View {
     }
     
 }
+
     
 
