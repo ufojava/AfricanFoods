@@ -21,24 +21,13 @@ struct ContentView: View {
                 Section {
                 VStack(alignment: .leading) {
                     
+                        
                     
-                    
-                            
-                    Text("Meal Description").foregroundColor(.green)
-                    Spacer()
-                               
-                            NavigationLink(destination: PoundedYam()) {
-                                Text("Pounded Yam & Egusi Soup")
+                    NavigationLink(destination: MenuOption()) {
+                        Text("Meal Options")
                     }
                     
-                            NavigationLink(destination: YamPepSoup()) {
-                                Text("Yam and Pepper Soup")
-                            }
                     
-                    
-                        NavigationLink(destination: JollofRice()) {
-                                Text("Jollof Rice & Plantain")
-                        }
                             
                     Spacer()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
@@ -48,11 +37,12 @@ struct ContentView: View {
                     }.padding()
                     
                 }
-                 
+                
                 
                 Section {
                     
                     VStack {
+                        
                         
                         Image("africanfoods")
                                            .resizable()
@@ -99,63 +89,19 @@ struct ContentView: View {
                      
                         
                     
-                    .navigationBarTitle(Text("Menu"))
-                    
-
-                    
-            
+                    .navigationBarTitle(Text("African Foods Center"))
                     
             }   //NavView End
-            
-            
-            
-            
-           /*
-          
-            //Button begin
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                
-                
-                
-                NavigationLink(destination: CreatOrderView()) {
-                    Text("Create Order")
-                    
-                }
-            }
-                
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.blue)
-            .cornerRadius(8)
-            Spacer()
-           */
-            //Button Ends
-          
-        
-            
-        
-            
-                     
-            
         
            
-        } //VStack End
+    } //VStack End
     
-    
-        
-    
-        
-        
-        
 
         
     }
 
 
 }
-
-
-
 
 
 struct ContentView_Previews: PreviewProvider {
@@ -165,31 +111,53 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-struct PoundedYam: View {
+struct MenuOption: View {
+    
+    @State private var menuItem = 0
+    
+    var menuItems = ["Rice Meals", "Swallow Meals", "Pepper Soups"]
     
     var body: some View {
-        
-        Text("Page 1")
-    }
     
-}
-    
-struct YamPepSoup: View {
-        
-    var body: some View {
+        VStack(alignment: .leading) {
             
-        Text("Page 2").fontWeight(.heavy)
-        }
+            Section(header: Text("Select Meal")) {
+                
+                Picker("Select Item", selection: $menuItem) {
+                             ForEach(0 ..< menuItems.count) {
+                                 Text(self.menuItems[$0])
+                                 //Spacer()
+                                 
+                             }
+                         }.pickerStyle(SegmentedPickerStyle())
+                         
+                         
+                         if menuItems[menuItem] == "Rice Meals" {
+                             Text("Selected Rice Meals")
+                                .foregroundColor(.blue)
+                             
+                         } else if menuItems[menuItem] == "Swallow Meals" {
+                             Text("Selected Swallow")
+                                .foregroundColor(.green)
+                             
+                             
+                         } else if menuItems[menuItem] == "Pepper Soups" {
+                             Text("Pepper Soups Selected")
+                                .foregroundColor(.red)
+                         }
+                         
+                         Spacer()
+                
+                
+            }.font(.system(size: 14))
+             .foregroundColor(.green)
+            
+            
+         
+        } //Vstack Ending
         
-    }
-
-struct JollofRice: View {
     
-var body: some View {
-        
-    Text("Page 2").fontWeight(.heavy)
-    }
-    
+    } //View Ending
 }
 
     
