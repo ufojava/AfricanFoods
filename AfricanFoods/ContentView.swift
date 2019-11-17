@@ -57,33 +57,46 @@ struct ContentView: View {
                         
                     }
                     
-                Section { //Button Order
+                Section { //Social Media
                     
                     VStack {
                         Spacer()
                         
-                        HStack(alignment: .center, spacing: 130) {
+                        HStack {
                             Spacer()
-                            Button(action: {}) {
-                                NavigationLink(destination: CreatOrderView()) {
-                                    Text("Create Order")
-                                        .font(.system(size: 14))
-                                        .padding()
-                                        .background(Color.blue)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(6)
-                                    
-                                }.padding()
-                                Spacer()
+                                Image("facebook")
+                                    .resizable()
+                                    .frame(width:40, height: 40)
+                                    .scaledToFit()
+                                    .padding()
                             
-                            }
+                                Image("instergram")
+                                .resizable()
+                                .frame(width:40, height: 40)
+                                .scaledToFit()
+                                .padding()
+                            
+                                
+                                Image("youtube")
+                                        .resizable()
+                                        .frame(width:40, height: 40)
+                                        .scaledToFit()
+                                        .padding()
+                            
+                            
+                                Image("twitter")
+                                        .resizable()
+                                        .frame(width:40, height: 40)
+                                        .scaledToFit()
+                                        .padding(.horizontal, 50)
+                         
                         }
                       
-                        
+                    
                     } //Vstack End
                     
                     
-                } //Button Section End
+                } //Social Media
                     
                
                      
@@ -147,7 +160,7 @@ struct MenuOption: View {
                                 .lineLimit(nil)
                                 .padding(.horizontal, 25)
                                 
-                                Spacer()
+                            Spacer().frame(height:60)
                             
                                 //Insert image - Jollof Rice
                                 Image("jollofRice")
@@ -156,6 +169,36 @@ struct MenuOption: View {
                                     .scaledToFit()
                                     .border(Color.black, width: 4)
                                     .padding(.horizontal, 100)
+                            
+                            
+                            Section { //Button Order
+                                
+                                VStack {
+                                    Spacer()
+                                    
+                                    HStack(alignment: .center, spacing: 140) {
+                                        Spacer()
+                                        Button(action: {}) {
+                                            NavigationLink(destination: CreatOrderView()) {
+                                                Text("Create Order")
+                                                    .font(.system(size: 14))
+                                                    .padding()
+                                                    .background(Color.blue)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(6)
+                                                
+                                            }.padding()
+                                            Spacer()
+                                    
+                                        
+                                        }
+                                    }
+                                  
+                                
+                                } //Vstack End
+                                
+                                
+                            } //Button Section End
                             
                                 
                                 
@@ -173,7 +216,7 @@ struct MenuOption: View {
                                     .lineLimit(nil)
                                     .padding(.horizontal, 25)
                                     
-                                Spacer()
+                            Spacer().frame(height:60)
                             
                                 //Inset Image
                                 Image("poundedYamEgusi")
@@ -182,6 +225,36 @@ struct MenuOption: View {
                                     .scaledToFit()
                                     .border(Color.black, width: 4)
                                     .padding(.horizontal, 100)
+                            
+                            
+                            //Insert Order Button
+                            Section {
+                                
+                                VStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack(alignment: .center, spacing: 140) {
+                                        Spacer()
+                                            Button(action: {}) {
+                                            
+                                                NavigationLink(destination: CreatOrderView()) {
+                                                    Text("Create Order")
+                                                        .font(.system(size: 14))
+                                                        .padding()
+                                                        .background(Color.blue)
+                                                        .foregroundColor(.white)
+                                                        .cornerRadius(6)
+                                                    
+                                                }.padding()
+                                                Spacer()
+                                            }
+                                    }
+                                    
+                                } //VStack End
+                                
+                                
+                            } //Section End
                             
                              
                              
@@ -194,10 +267,10 @@ struct MenuOption: View {
                                 Text("Pepper soup is normally taken after one has had either Pounded Yam or rice meals. Depending on the audeience, the soup can be lightly spicy to very hot. Pepper soup can be had with either fish or meat")
                             
                                     .foregroundColor(.blue)
-                            .lineLimit(nil)
+                                    .lineLimit(nil)
                                     .padding(.horizontal, 25)
                             
-                            Spacer()
+                            Spacer().frame(height:60)
                             
                             //Insert Image
                             Image("pepperSoupYam")
@@ -206,6 +279,37 @@ struct MenuOption: View {
                                 .scaledToFit()
                                 .border(Color.black, width: 4)
                                 .padding(.horizontal, 100)
+                            
+                            
+                            //Inset Order Button
+                            Section {
+                                
+                                
+                                
+                                VStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack(alignment: .center, spacing: 140) {
+                                        Spacer()
+                                        
+                                        Button(action: {}) {
+                                            
+                                            NavigationLink(destination: CreatOrderView()) {
+                                                Text("Create Order")
+                                                .font(.system(size: 14))
+                                                .padding()
+                                                .background(Color.blue)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(6)
+                                                
+                                            }.padding()
+                                            Spacer()
+                                        }
+                                    }
+                                    
+                                }
+                            }
                             
                          }
            
