@@ -7,6 +7,26 @@
 //
 
 import SwiftUI
+import Combine
+
+class MealOrders: ObservableObject {
+    
+    //Jollof Rice - Published
+    @Published var jollof = 0
+    
+    //Swallow - Published
+    @Published var swallow = 0
+    
+    //Pepper Soup - Published
+    @Published var pepperSoup = 0
+    
+    
+}
+
+
+
+
+
 
 struct ContentView: View {
     var body: some View {
@@ -126,9 +146,45 @@ struct ContentView_Previews: PreviewProvider {
 
 struct MenuOption: View {
     
+    //Object Observed Declarations
+    @ObservedObject var meals = MealOrders()
+    
+    //Meal Prices
+    @State private var jolloRiceUnitCost = 14.95 //Jollof Rice Unit Cost
+    
+    @State private var swallowUnitCost = 12.50 //Swallow Unit Cost
+    
+    @State private var pepperSoupUnitCost = 13.50 //Pepper Soup Unit Cost
+    
+    @State private var deliveryCost = 5.99 //Delivery Cost
+    
+    
     @State private var menuItem = 0
     
     var menuItems = ["Rice Meals", "Swallow Meals", "Pepper Soups"]
+    
+    //Meals Calculator
+    var calculateMeal: Double {
+        
+        var orderCost = 0.0
+        
+        //Jollof Rice
+        if menuItems[menuItem] == "Rice Meals" {
+             orderCost = self.jolloRiceUnitCost * Double(self.meals.jollof)
+                return orderCost
+            
+        //Swallow - Pounded Yam / Eba
+        } else if menuItems[menuItem] == "Swallow Meals" {
+            orderCost = self.swallowUnitCost * Double(self.meals.swallow)
+            
+        } else if menuItems[menuItem] == "Pepper Soup" {
+            orderCost = self.pepperSoupUnitCost * Double(self.meals.pepperSoup)
+            
+        }
+        
+            return orderCost
+    }
+    
     
     var body: some View {
     
@@ -170,6 +226,17 @@ struct MenuOption: View {
                                     .border(Color.black, width: 4)
                                     .padding(.horizontal, 100)
                             
+                            Spacer().frame(height:20)
+                            
+                            HStack {
+                            Stepper("Quantity",value: $meals.jollof, in: 0...5)
+                                .padding(.horizontal, 45)
+                                Text("£\(calculateMeal, specifier: "%.2f")")
+                                .padding()
+                            
+                            }.padding()
+                            
+                            
                             
                             Section { //Button Order
                                 
@@ -179,7 +246,7 @@ struct MenuOption: View {
                                     HStack(alignment: .center, spacing: 140) {
                                         Spacer()
                                         Button(action: {}) {
-                                            NavigationLink(destination: CreatOrderView()) {
+                                            NavigationLink(destination: NewOrders()) {
                                                 Text("Create Order")
                                                     .font(.system(size: 14))
                                                     .padding()
@@ -238,7 +305,7 @@ struct MenuOption: View {
                                         Spacer()
                                             Button(action: {}) {
                                             
-                                                NavigationLink(destination: CreatOrderView()) {
+                                                NavigationLink(destination: NewOrders()) {
                                                     Text("Create Order")
                                                         .font(.system(size: 14))
                                                         .padding()
@@ -295,7 +362,7 @@ struct MenuOption: View {
                                         
                                         Button(action: {}) {
                                             
-                                            NavigationLink(destination: CreatOrderView()) {
+                                            NavigationLink(destination: NewOrders()) {
                                                 Text("Create Order")
                                                 .font(.system(size: 14))
                                                 .padding()
@@ -329,6 +396,25 @@ struct MenuOption: View {
     
     } //View Ending
 }
+
+
+//This sis going to be the Orders Struct
+struct NewOrders: View {
+    
+    var  body: some View {
+    
+        VStack {
+            
+            Text("Hello World New View")
+        
+        
+            
+        }
+        
+    }
+    
+}
+
 
     
 
