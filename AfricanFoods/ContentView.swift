@@ -163,6 +163,7 @@ struct MenuOption: View {
     
     var menuItems = ["Rice Meals", "Swallow Meals", "Pepper Soups"]
     
+    
     //Meals Calculator
     var calculateMeal: Double {
         
@@ -177,7 +178,7 @@ struct MenuOption: View {
         } else if menuItems[menuItem] == "Swallow Meals" {
             orderCost = self.swallowUnitCost * Double(self.meals.swallow)
             
-        } else if menuItems[menuItem] == "Pepper Soup" {
+        } else if menuItems[menuItem] == "Pepper Soups" {
             orderCost = self.pepperSoupUnitCost * Double(self.meals.pepperSoup)
             
         }
@@ -229,18 +230,18 @@ struct MenuOption: View {
                             Spacer().frame(height:20)
                             
                             HStack {
-                            Stepper("Quantity",value: $meals.jollof, in: 0...5)
+                            Stepper("Quantity (Max 5)",value: $meals.jollof, in: 0...5)
                                 .padding(.horizontal, 45)
-                                Text("£\(calculateMeal, specifier: "%.2f")")
+                                Text("\(meals.jollof): £\(calculateMeal, specifier: "%.2f")")
+                                
                                 .padding()
                             
                             }.padding()
                             
-                            
-                            
+                        
                             Section { //Button Order
                                 
-                                VStack {
+                                VStack {//Add Stepper for Quantity
                                     Spacer()
                                     
                                     HStack(alignment: .center, spacing: 140) {
@@ -292,6 +293,13 @@ struct MenuOption: View {
                                     .scaledToFit()
                                     .border(Color.black, width: 4)
                                     .padding(.horizontal, 100)
+                            
+                            HStack {//Add Stepper for Quantity
+                                Stepper("Quantity (Max 5)",value: $meals.swallow, in: 0...5)
+                                    .padding(.horizontal, 45)
+                                Text("\(meals.swallow): £\(calculateMeal, specifier: "%.2f")")
+                                .padding()
+                            }.padding()
                             
                             
                             //Insert Order Button
@@ -347,6 +355,13 @@ struct MenuOption: View {
                                 .border(Color.black, width: 4)
                                 .padding(.horizontal, 100)
                             
+                            HStack {//Add Stepper Quantity for Pepper Soup
+                                Stepper("Quantity (5 Max)",value: $meals.pepperSoup, in: 0...5)
+                                    .padding(.horizontal, 45)
+                                Text("\(meals.pepperSoup): £\(calculateMeal, specifier: "%.2f")")
+                                .padding()
+                                
+                            }.padding()
                             
                             //Inset Order Button
                             Section {
@@ -402,14 +417,24 @@ struct MenuOption: View {
 struct NewOrders: View {
     
     var  body: some View {
+        
+        NavigationView {
+            
+            VStack {
+                     
+                Text("Hello World New View")
+                     
+            }
+            
+     
+            
+        }.navigationBarTitle(Text("New Order"), displayMode: .inline)//NavigationView End
+        
+        
+        
+        
     
-        VStack {
-            
-            Text("Hello World New View")
-        
-        
-            
-        }
+     
         
     }
     
