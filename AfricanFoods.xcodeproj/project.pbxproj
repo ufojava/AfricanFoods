@@ -13,7 +13,6 @@
 		03CE789A237BCC8D00429CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CE7899237BCC8D00429CB3 /* Assets.xcassets */; };
 		03CE789D237BCC8D00429CB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CE789C237BCC8D00429CB3 /* Preview Assets.xcassets */; };
 		03CE78A0237BCC8D00429CB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03CE789E237BCC8D00429CB3 /* LaunchScreen.storyboard */; };
-		03CE78A8237E6EF100429CB3 /* CreatOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE78A7237E6EF100429CB3 /* CreatOrderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		03CE789C237BCC8D00429CB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		03CE789F237BCC8D00429CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03CE78A1237BCC8D00429CB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03CE78A7237E6EF100429CB3 /* CreatOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +63,6 @@
 				03CE789E237BCC8D00429CB3 /* LaunchScreen.storyboard */,
 				03CE78A1237BCC8D00429CB3 /* Info.plist */,
 				03CE789B237BCC8D00429CB3 /* Preview Content */,
-				03CE78A7237E6EF100429CB3 /* CreatOrderView.swift */,
 			);
 			path = AfricanFoods;
 			sourceTree = "<group>";
@@ -150,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE7894237BCC8C00429CB3 /* AppDelegate.swift in Sources */,
-				03CE78A8237E6EF100429CB3 /* CreatOrderView.swift in Sources */,
 				03CE7896237BCC8C00429CB3 /* SceneDelegate.swift in Sources */,
 				03CE7898237BCC8C00429CB3 /* ContentView.swift in Sources */,
 			);

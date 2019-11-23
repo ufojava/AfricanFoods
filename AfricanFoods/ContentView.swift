@@ -13,12 +13,24 @@ class MealOrders: ObservableObject {
     
     //Jollof Rice - Published
     @Published var jollof = 0
+    @Published var jollofTotalCost = 0.0
     
     //Swallow - Published
     @Published var swallow = 0
+    @Published var swallowTotalCost = 0.0
     
     //Pepper Soup - Published
     @Published var pepperSoup = 0
+    @Published var peppersoupTotalCost = 0.0
+    
+    //Function to check
+    func totalJollofCost() {
+        
+        
+        
+        
+    }
+    
     
     
 }
@@ -138,40 +150,43 @@ struct MenuOption: View {
     
     //Meal Prices
     @State private var jolloRiceUnitCost = 14.95 //Jollof Rice Unit Cost
+   
     
     @State private var swallowUnitCost = 12.50 //Swallow Unit Cost
+    @State private var swallowTotalCost = 0.0 //Swallow Total Cost
     
     @State private var pepperSoupUnitCost = 13.50 //Pepper Soup Unit Cost
+    @State private var peppersoupTotalCost = 0.0 //Peppersoup Total Cost
     
     @State private var deliveryCost = 5.99 //Delivery Cost
+    
+    //Show Alert
+    @State private var showingAlert =  false
     
     
     @State private var menuItem = 0
     
     var menuItems = ["Rice Meals", "Swallow Meals", "Pepper Soups"]
     
-    
-    
-    
-    
-    
-    
-    //Meals Calculator
+
      var calculateMeal: Double {
         
         var orderCost = 0.0
         
         //Jollof Rice
         if menuItems[menuItem] == "Rice Meals" {
+            
              orderCost = self.jolloRiceUnitCost * Double(self.meals.jollof)
-                return orderCost
             
         //Swallow - Pounded Yam / Eba
         } else if menuItems[menuItem] == "Swallow Meals" {
             orderCost = self.swallowUnitCost * Double(self.meals.swallow)
+            self.swallowTotalCost = orderCost
+            
             
         } else if menuItems[menuItem] == "Pepper Soups" {
             orderCost = self.pepperSoupUnitCost * Double(self.meals.pepperSoup)
+            self.peppersoupTotalCost = orderCost
             
         }
         
@@ -179,15 +194,29 @@ struct MenuOption: View {
     }
     
     
+    
+    
+
+    
+    
     var body: some View {
+        
+    
     
         VStack(alignment: .leading) {
             
             
             HStack(alignment: .center) {
-                Button(action: {}) {
+                Button(action: {
+                    
+                    //You can insert actions here
+                    
+                }) {
+                    
+                    
                                     
-                    NavigationLink(destination: NewOrders(orderUpdate: $meals.jollof,swallowOrderUpdate: $meals.swallow)) {
+                    NavigationLink(destination: NewOrders(jollofOrderUpdate: $meals.jollof,swallowOrderUpdate: $meals.swallow, peppersoupOrderUpdate: $meals.pepperSoup, jollofTotalCostUpdate: $meals.jollofTotalCost)) {
+                        
                     Text("Create Order")
                         .font(.system(size: 14))
                         .padding()
@@ -196,7 +225,7 @@ struct MenuOption: View {
                         .cornerRadius(6)
                                                         
                         }.padding()
-                        //Spacer()
+                     
                                             
                     }
                 
@@ -222,7 +251,7 @@ struct MenuOption: View {
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 25)
                             
-                            Spacer().frame(height:20)
+                            Spacer().frame(height:10)
                                 Text("Rice meals consist of Jollof Rice, Rice and Stew, Fried Rice. You can option in meat, fish and or plantain with any of the meals")
                                 .foregroundColor(.blue)
                                 .lineLimit(nil)
@@ -238,19 +267,57 @@ struct MenuOption: View {
                                     .border(Color.black, width: 4)
                                     .padding(.horizontal, 100)
                             
-                            Spacer().frame(height:20)
+                            Spacer()//.frame(height:20)
                             
                             HStack {
                             Stepper("Quantity (Max 5)",value: $meals.jollof, in: 0...5)
                                 .padding(.horizontal, 45)
+                                //Text("\(meals.jollof): £\(calculateMeal, specifier: "%.2f")")
                                 Text("\(meals.jollof): £\(calculateMeal, specifier: "%.2f")")
+                               
                         
                                 
                                 .padding()
-                            
+                                
                             }.padding()
+                            Spacer()
                             
-            
+                            //Add to shoopping cart Button action
+                            
+                            Section {
+                                
+                                VStack {
+                                    
+                                    HStack(alignment: .center, spacing: 130) {
+                                        
+                                        Spacer()
+                                        Button(action: {
+                                            //reassign total value to Jollof Rice
+                                            self.meals.jollofTotalCost = self.calculateMeal
+                                             
+                                            //Show Alert
+                                            self.showingAlert = true
+                                            
+                                        }) {
+                                            
+                                            Text("Add To Cart")
+                                                .font(.system(size: 14))
+                                                .padding()
+                                                .background(Color.blue)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(6)
+                                            
+                                        }.padding()
+                                            .alert(isPresented: $showingAlert) {
+                                                Alert(title: Text("Shopping Message"), message: Text("Item Added"), dismissButton: .default(Text("OK")))
+                                        }
+                                        Spacer()
+                                    }
+                                    
+                                }
+                            }
+                            
+                            
                                 
                 
                              
@@ -282,6 +349,30 @@ struct MenuOption: View {
                                 Text("\(meals.swallow): £\(calculateMeal, specifier: "%.2f")")
                                 .padding()
                             }.padding()
+                            
+                            //Add to shoopping cart Button action
+                            
+                            Section {
+                                
+                                VStack {
+                                    
+                                    HStack(alignment: .center, spacing: 130) {
+                                        
+                                        Spacer()
+                                        Button(action: {}) {
+                                            
+                                            Text("Add To Cart")
+                                                .font(.system(size: 14))
+                                                .padding()
+                                                .background(Color.blue)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(6)
+                                        }.padding()
+                                        Spacer()
+                                    }
+                                    
+                                }
+                            }
                             
                             
                              
@@ -332,21 +423,34 @@ struct MenuOption: View {
          
         } //Vstack Ending
         
-    
+
     } //View Ending
+    
+    
 }
 
 
 //This sis going to be the Orders Struct
 struct NewOrders: View {
     
+    
   
-   
-    @Binding var orderUpdate: Int
+   //Meals Order Update
+    @Binding var jollofOrderUpdate: Int
     @Binding var swallowOrderUpdate: Int
+    @Binding var peppersoupOrderUpdate: Int
     
+    @Binding var jollofTotalCostUpdate: Double
+
     
+    /*
+    //Meals Total Costs
+    @Binding var jollofTotalCostUpdate: Double
+    @Binding var swallowTotalCostUpdate: Double
+    @Binding var peppersoupTotalCostUpdate: Double
+    */
     
+    @State var jollofCost = 24.5
     
     var  body: some View {
         
@@ -357,25 +461,31 @@ struct NewOrders: View {
                 
                 List {
                     
-            
+                    HStack {
+                        Text("Jollof Rice, Quantity: \(jollofOrderUpdate)")
+                        Text("Cost: £\(jollofTotalCostUpdate, specifier: "%.2f")")
+                        
                     
-                    Text("\(orderUpdate)")
+                        
+                    }.padding()
+                    
+                    
+                    
+                    
+                    
+                    
                     Text("\(swallowOrderUpdate)")
-                
-                    
-                    
-                
-                
+                    Text("\(peppersoupOrderUpdate)")
             
                     
                     
                 }
                 
-                     
             }
             
             
-
+            
+    
          
         }.navigationBarTitle("Meal Order")
         
