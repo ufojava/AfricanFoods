@@ -25,64 +25,51 @@ class MealOrders: ObservableObject {
 
 
 
-
-
-
 struct ContentView: View {
     var body: some View {
         
         
-       
-        
-        VStack {
-            NavigationView {
+              VStack {
+                NavigationView {
                 
                 
-                Section {
-                VStack(alignment: .leading) {
+                    Section {
+                        VStack(alignment: .leading) {
                     
-                        
-                    
-                    NavigationLink(destination: MenuOption()) {
+                        NavigationLink(destination: MenuOption()) {
                         Text("Meal Options")
                     }
                     
-                    
-                            
-                    Spacer()
+                        Spacer()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                     
+                        }.padding() //Vstack End
                     
-                    
-                    }.padding()
-                    
-                }
-                
-                
-                Section {
-                    
-                    VStack {
-                        
-                        
-                        Image("africanfoods")
-                                           .resizable()
-                                           .frame(width: 275.0, height: 250.0)
-                                           .clipShape(Circle())
-                                           .overlay(Circle().stroke(Color.black, lineWidth: 5))
-                                           .scaledToFit()
-                                       
-                                   }
-            
-                    
-                        
                     }
+                
+                
+                    Section {
                     
-                Section { //Social Media
-                    
-                    VStack {
-                        Spacer()
+                        VStack {
                         
-                        HStack {
+                            Image("africanfoods")
+                                .resizable()
+                                .frame(width: 275.0, height: 250.0)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.black, lineWidth: 5))
+                                .scaledToFit()
+                                       
+                        }
+            
+                                            
+                    } //Section End
+                    
+                    Section { //Social Media
+                    
+                        VStack {
+                            Spacer()
+                        
+                            HStack {
                             Spacer()
                                 Image("facebook")
                                     .resizable()
@@ -164,8 +151,13 @@ struct MenuOption: View {
     var menuItems = ["Rice Meals", "Swallow Meals", "Pepper Soups"]
     
     
+    
+    
+    
+    
+    
     //Meals Calculator
-    var calculateMeal: Double {
+     var calculateMeal: Double {
         
         var orderCost = 0.0
         
@@ -190,6 +182,25 @@ struct MenuOption: View {
     var body: some View {
     
         VStack(alignment: .leading) {
+            
+            
+            HStack(alignment: .center) {
+                Button(action: {}) {
+                                    
+                    NavigationLink(destination: NewOrders(orderUpdate: $meals.jollof,swallowOrderUpdate: $meals.swallow)) {
+                    Text("Create Order")
+                        .font(.system(size: 14))
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(6)
+                                                        
+                        }.padding()
+                        //Spacer()
+                                            
+                    }
+                
+            }.padding(.horizontal, 145)
             
             Section(header: Text("Select Meal").padding(.horizontal, 25)) {
                 
@@ -233,42 +244,13 @@ struct MenuOption: View {
                             Stepper("Quantity (Max 5)",value: $meals.jollof, in: 0...5)
                                 .padding(.horizontal, 45)
                                 Text("\(meals.jollof): £\(calculateMeal, specifier: "%.2f")")
+                        
                                 
                                 .padding()
                             
                             }.padding()
                             
-                        
-                            Section { //Button Order
-                                
-                                VStack {//Add Stepper for Quantity
-                                    Spacer()
-                                    
-                                    HStack(alignment: .center, spacing: 140) {
-                                        Spacer()
-                                        Button(action: {}) {
-                                            NavigationLink(destination: NewOrders()) {
-                                                Text("Create Order")
-                                                    .font(.system(size: 14))
-                                                    .padding()
-                                                    .background(Color.blue)
-                                                    .foregroundColor(.white)
-                                                    .cornerRadius(6)
-                                                
-                                            }.padding()
-                                            Spacer()
-                                    
-                                        
-                                        }
-                                    }
-                                  
-                                
-                                } //Vstack End
-                                
-                                
-                            } //Button Section End
-                            
-                                
+            
                                 
                 
                              
@@ -302,35 +284,6 @@ struct MenuOption: View {
                             }.padding()
                             
                             
-                            //Insert Order Button
-                            Section {
-                                
-                                VStack {
-                                    
-                                    Spacer()
-                                    
-                                    HStack(alignment: .center, spacing: 140) {
-                                        Spacer()
-                                            Button(action: {}) {
-                                            
-                                                NavigationLink(destination: NewOrders()) {
-                                                    Text("Create Order")
-                                                        .font(.system(size: 14))
-                                                        .padding()
-                                                        .background(Color.blue)
-                                                        .foregroundColor(.white)
-                                                        .cornerRadius(6)
-                                                    
-                                                }.padding()
-                                                Spacer()
-                                            }
-                                    }
-                                    
-                                } //VStack End
-                                
-                                
-                            } //Section End
-                            
                              
                              
                          } else if menuItems[menuItem] == "Pepper Soups" {
@@ -363,35 +316,6 @@ struct MenuOption: View {
                                 
                             }.padding()
                             
-                            //Inset Order Button
-                            Section {
-                                
-                                
-                                
-                                VStack {
-                                    
-                                    Spacer()
-                                    
-                                    HStack(alignment: .center, spacing: 140) {
-                                        Spacer()
-                                        
-                                        Button(action: {}) {
-                                            
-                                            NavigationLink(destination: NewOrders()) {
-                                                Text("Create Order")
-                                                .font(.system(size: 14))
-                                                .padding()
-                                                .background(Color.blue)
-                                                .foregroundColor(.white)
-                                                .cornerRadius(6)
-                                                
-                                            }.padding()
-                                            Spacer()
-                                        }
-                                    }
-                                    
-                                }
-                            }
                             
                          }
            
@@ -416,24 +340,45 @@ struct MenuOption: View {
 //This sis going to be the Orders Struct
 struct NewOrders: View {
     
+  
+   
+    @Binding var orderUpdate: Int
+    @Binding var swallowOrderUpdate: Int
+    
+    
+    
+    
     var  body: some View {
         
-        NavigationView {
+       
+        NavigationView{
             
             VStack {
-                     
-                Text("Hello World New View")
+                
+                List {
+                    
+            
+                    
+                    Text("\(orderUpdate)")
+                    Text("\(swallowOrderUpdate)")
+                
+                    
+                    
+                
+                
+            
+                    
+                    
+                }
+                
                      
             }
             
-     
             
-        }.navigationBarTitle(Text("New Order"), displayMode: .inline)//NavigationView End
+
+         
+        }.navigationBarTitle("Meal Order")
         
-        
-        
-        
-    
      
         
     }
