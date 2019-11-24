@@ -214,8 +214,8 @@ struct MenuOption: View {
                 }) {
                     
                     
-                                    
-                    NavigationLink(destination: NewOrders(jollofOrderUpdate: $meals.jollof,swallowOrderUpdate: $meals.swallow, peppersoupOrderUpdate: $meals.pepperSoup, jollofTotalCostUpdate: $meals.jollofTotalCost)) {
+                    //Link to Create Orders to show items added to cart
+                    NavigationLink(destination: NewOrders(jollofOrderUpdate: $meals.jollof,swallowOrderUpdate: $meals.swallow, peppersoupOrderUpdate: $meals.pepperSoup, jollofTotalCostUpdate: $meals.jollofTotalCost,swallowTotalCostUpdate: $meals.swallowTotalCost,peppersoupTotalCostUpdate: $meals.peppersoupTotalCost)) {
                         
                     Text("Create Order")
                         .font(.system(size: 14))
@@ -308,8 +308,8 @@ struct MenuOption: View {
                                                 .cornerRadius(6)
                                             
                                         }.padding()
-                                            .alert(isPresented: $showingAlert) {
-                                                Alert(title: Text("Shopping Message"), message: Text("Item Added"), dismissButton: .default(Text("OK")))
+                                         .alert(isPresented: $showingAlert) {
+                                                Alert(title: Text("Shopping Message"), message: Text("Jollof Rice Added"), dismissButton: .default(Text("OK")))
                                         }
                                         Spacer()
                                     }
@@ -333,7 +333,7 @@ struct MenuOption: View {
                                     .lineLimit(nil)
                                     .padding(.horizontal, 25)
                                     
-                            Spacer().frame(height:60)
+                            Spacer()//.frame(height:60)
                             
                                 //Inset Image
                                 Image("poundedYamEgusi")
@@ -359,7 +359,17 @@ struct MenuOption: View {
                                     HStack(alignment: .center, spacing: 130) {
                                         
                                         Spacer()
-                                        Button(action: {}) {
+                                        Button(action: {
+                                        
+                                            //Reassign total value to Swallow
+                                            self.meals.swallowTotalCost = self.calculateMeal
+                                            
+                                            //Show Alert
+                                            self.showingAlert = true
+                                            
+                                            
+                                            
+                                        }) {
                                             
                                             Text("Add To Cart")
                                                 .font(.system(size: 14))
@@ -368,6 +378,10 @@ struct MenuOption: View {
                                                 .foregroundColor(.white)
                                                 .cornerRadius(6)
                                         }.padding()
+                                            .alert(isPresented: $showingAlert) {
+                                                Alert(title: Text("Shopping Message"), message: Text("Swallow Added"), dismissButton: .default(Text("OK")))
+                                        }
+                                        
                                         Spacer()
                                     }
                                     
@@ -389,7 +403,7 @@ struct MenuOption: View {
                                     .lineLimit(nil)
                                     .padding(.horizontal, 25)
                             
-                            Spacer().frame(height:60)
+                            Spacer()//.frame(height:60)
                             
                             //Insert Image
                             Image("pepperSoupYam")
@@ -406,6 +420,50 @@ struct MenuOption: View {
                                 .padding()
                                 
                             }.padding()
+                            
+                            //Add to shopping cart action
+                            
+                            Section {
+                                
+                                VStack {
+                                    
+                                    HStack(alignment: .center, spacing: 130) {
+                                        
+                                        Spacer()
+                                        Button(action: {
+                                            
+                                            //Assign Peppersoup value in total cost
+                                            self.meals.peppersoupTotalCost = self.calculateMeal
+                                            
+                                            //Insert button action here
+                                            self.showingAlert = true
+                                            
+                                            
+                                        }) {
+                                            
+                                            Text("Add to Cart")
+                                            
+                                                .font(.system(size: 14))
+                                                .padding()
+                                                .background(Color.blue)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(6)
+                                            
+                                                                        
+                                    }.padding()
+                                            .alert(isPresented: $showingAlert) {
+                                                Alert(title: Text("Shopping Message"), message: Text("Soup Added"), dismissButton: .default(Text("OK")))
+                                        }
+                                        Spacer()
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
                             
                             
                          }
@@ -440,17 +498,14 @@ struct NewOrders: View {
     @Binding var swallowOrderUpdate: Int
     @Binding var peppersoupOrderUpdate: Int
     
-    @Binding var jollofTotalCostUpdate: Double
-
     
-    /*
     //Meals Total Costs
     @Binding var jollofTotalCostUpdate: Double
     @Binding var swallowTotalCostUpdate: Double
     @Binding var peppersoupTotalCostUpdate: Double
-    */
     
-    @State var jollofCost = 24.5
+  
+    
     
     var  body: some View {
         
@@ -461,21 +516,36 @@ struct NewOrders: View {
                 
                 List {
                     
+                    //Report on Jollof Rice
                     HStack {
                         Text("Jollof Rice, Quantity: \(jollofOrderUpdate)")
                         Text("Cost: £\(jollofTotalCostUpdate, specifier: "%.2f")")
-                        
+                    }.padding()
+                     .font(.system(size: 14))
                     
+                    
+                    //Report on Swallow
+                    HStack {
+                        Text("Swallow Quantity: \(swallowOrderUpdate)")
+                        Text("Cost: £\(swallowTotalCostUpdate,specifier: "%.2f")")
                         
                     }.padding()
+                     .font(.system(size: 14))
+                    
+                    
+                    HStack {
+                        
+                         Text("Peppersoup Quamtity: \(peppersoupOrderUpdate)")
+                         Text("Cost: £\(peppersoupTotalCostUpdate,specifier: "%.2f")")
+                        
+                    }.padding()
+                     .font(.system(size: 14))
                     
                     
                     
                     
                     
-                    
-                    Text("\(swallowOrderUpdate)")
-                    Text("\(peppersoupOrderUpdate)")
+                   
             
                     
                     
