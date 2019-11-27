@@ -56,6 +56,8 @@ struct ContentView: View {
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                     
                         }.padding() //Vstack End
+                        
+                    
                     
                     }
                 
@@ -206,13 +208,16 @@ struct MenuOption: View {
         VStack(alignment: .leading) {
             
             
+            Section {//Section for Creating New Order
+            
+                //Creating Alert here ***********
+            
             HStack(alignment: .center) {
+                
                 Button(action: {
                     
-                    //You can insert actions here
                     
-                }) {
-                    
+                    }) {
                     
                     //Link to Create Orders to show items added to cart
                     NavigationLink(destination: NewOrders(jollofOrderUpdate: $meals.jollof,swallowOrderUpdate: $meals.swallow, peppersoupOrderUpdate: $meals.pepperSoup, jollofTotalCostUpdate: $meals.jollofTotalCost,swallowTotalCostUpdate: $meals.swallowTotalCost,peppersoupTotalCostUpdate: $meals.peppersoupTotalCost)) {
@@ -226,10 +231,19 @@ struct MenuOption: View {
                                                         
                         }.padding()
                      
+                    
                                             
                     }
+              
                 
-            }.padding(.horizontal, 145)
+                
+            }.padding(.horizontal, 145) //End Button Vstack
+                
+            
+                
+            } //Section End
+                
+            
             
             Section(header: Text("Select Meal").padding(.horizontal, 25)) {
                 
@@ -504,6 +518,9 @@ struct NewOrders: View {
     @Binding var swallowTotalCostUpdate: Double
     @Binding var peppersoupTotalCostUpdate: Double
     
+    
+    @State private var showingAlert =  false
+    
   
     
     
@@ -516,42 +533,73 @@ struct NewOrders: View {
                 
                 List {
                     
-                    //Report on Jollof Rice
-                    HStack {
-                        Text("Jollof Rice, Quantity: \(jollofOrderUpdate)")
-                        Text("Cost: £\(jollofTotalCostUpdate, specifier: "%.2f")")
-                    }.padding()
-                     .font(.system(size: 14))
+                    if jollofOrderUpdate != 0 && jollofTotalCostUpdate != 0 { //Jollof Rice
                     
+                        //Report on Jollof Rice
+                        HStack {
+                            Text("Jollof Rice")
+                            Spacer()
+                            Text("Quantity: \(jollofOrderUpdate)")
+                            Spacer()
+                            Text("Cost: £\(jollofTotalCostUpdate, specifier: "%.2f")")
+                        }.padding()
+                            .font(.system(size: 14))
                     
-                    //Report on Swallow
-                    HStack {
-                        Text("Swallow Quantity: \(swallowOrderUpdate)")
-                        Text("Cost: £\(swallowTotalCostUpdate,specifier: "%.2f")")
+                    }
                         
-                    }.padding()
-                     .font(.system(size: 14))
-                    
-                    
-                    HStack {
-                        
-                         Text("Peppersoup Quamtity: \(peppersoupOrderUpdate)")
-                         Text("Cost: £\(peppersoupTotalCostUpdate,specifier: "%.2f")")
-                        
-                    }.padding()
-                     .font(.system(size: 14))
-                    
-                    
-                    
-                    
-                    
-                   
-            
-                    
-                    
-                }
+                        if swallowOrderUpdate != 0 && swallowTotalCostUpdate != 0 { //Swallow
                 
-            }
+                    
+                        //Report on Swallow
+                        HStack {
+                            Text("Swallow")
+                            Spacer()
+                            Text("Quantity: \(swallowOrderUpdate)")
+                            Spacer()
+                            Text("Cost: £\(swallowTotalCostUpdate,specifier: "%.2f")")
+                        
+                        }.padding()
+                            .font(.system(size: 14))
+                        
+                    }
+                    
+                    if peppersoupOrderUpdate != 0 && peppersoupTotalCostUpdate != 0 { //Pepper Soup
+                    
+                        HStack {
+                            Text("Pepper Soup")
+                            Spacer()
+                            Text("Quantity: \(peppersoupOrderUpdate)")
+                            Spacer()
+                            Text("Cost: £\(peppersoupTotalCostUpdate,specifier: "%.2f")")
+                        
+                        }.padding()
+                            .font(.system(size: 14))
+                    
+                    }
+                    
+                    if (jollofOrderUpdate == 0 && swallowOrderUpdate == 0 && peppersoupOrderUpdate == 0) {
+                        
+                    
+                        
+                            
+                           
+                            
+                            Text("Empty Cart")
+                                .font(.system(size: 25))
+                                .foregroundColor(.red)
+                                
+                        
+                        
+                    
+                        
+                        
+                    }
+                    
+                    
+                                            
+                } //List Ends here
+                
+            } //VStack Ends here
             
             
             
