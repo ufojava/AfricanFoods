@@ -577,27 +577,28 @@ struct NewOrders: View {
                     
                     }
                     
+                    } //List Ends here
+                
+                
+                VStack {
                     if (jollofOrderUpdate == 0 && swallowOrderUpdate == 0 && peppersoupOrderUpdate == 0) {
                         
-                    
+                       
                         
-                            
-                           
-                            
                             Text("Empty Cart")
                                 .font(.system(size: 25))
                                 .foregroundColor(.red)
+                    Spacer()
+                    
+                            
+        
                                 
-                        
-                        
-                    
-                        
-                        
+                                                                
                     }
-                    
+                }
                     
                                             
-                } //List Ends here
+                
                 
             } //VStack Ends here
             
